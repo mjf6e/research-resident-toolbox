@@ -166,6 +166,29 @@
   }
   ul.links li .note{color:var(--muted);}
   .note-only{font-size:.9rem;color:var(--muted);font-style:italic;margin:6px 0 0;}
+
+  /* ---------- Resources list view ---------- */
+  .reslist{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:8px 26px 22px;
+    box-shadow:0 1px 2px rgba(35,45,75,.04);
+  }
+  .reslist .res-group{padding:18px 0 4px;border-bottom:1px solid var(--line);}
+  .reslist .res-group:last-child{border-bottom:none;}
+  .reslist .res-presenter{
+    font-family:Georgia,serif;font-size:1.08rem;color:var(--navy);margin:0 0 2px;
+  }
+  .reslist .res-talk{font-size:.82rem;color:var(--muted);margin:0 0 10px;}
+  .reslist ul{list-style:none;margin:0;padding:0;}
+  .reslist li{
+    position:relative;padding-left:18px;margin-bottom:7px;font-size:.95rem;line-height:1.4;
+  }
+  .reslist li::before{
+    content:"";position:absolute;left:0;top:.55em;
+    width:6px;height:6px;border-radius:50%;background:var(--orange);
+  }
   .no-results{
     text-align:center;color:var(--muted);padding:60px 20px;font-size:1.05rem;
     display:none;
@@ -206,6 +229,7 @@
     </div>
     <div class="filters">
       <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="resources">Resources</button>
       <button class="filter-btn" data-filter="rip">RIP Series</button>
       <button class="filter-btn" data-filter="bootcamp">Boot Camp</button>
     </div>
@@ -708,6 +732,13 @@ function searchBlob(p){
 function render(){
   const q = searchEl.value.trim().toLowerCase();
   const terms = q.split(/\s+/).filter(Boolean);
+
+  if(activeFilter==='resources'){
+    renderResources(terms);
+    return;
+  }
+
+  grid.style.display = '';
   let shown = 0;
   let html = '';
   DATA.forEach(p=>{
@@ -724,6 +755,33 @@ function render(){
   noResults.style.display = shown ? 'none' : 'block';
   const total = DATA.length;
   countEl.textContent = shown===total ? '' : 'Showing '+shown+' of '+total;
+}
+
+function renderResources(terms){
+  grid.style.display = 'block';
+  let groups = '';
+  let linkCount = 0;
+  DATA.forEach(p=>{
+    if(!p.links || !p.links.length) return;
+    // a link matches if its own text matches, OR the presenter/talk matches
+    const presenterBlob = (p.name+' '+p.talk+' '+(p.topics||'')).toLowerCase();
+    const matching = p.links.filter(l=>{
+      if(!terms.length) return true;
+      const blob = (l.note+' '+l.url+' '+presenterBlob).toLowerCase();
+      return terms.every(t=>blob.includes(t));
+    });
+    if(!matching.length) return;
+    let lis = '';
+    matching.forEach(l=>{
+      lis += '<li><a href="'+l.url+'" target="_blank" rel="noopener">'+esc(l.note)+'</a></li>';
+      linkCount++;
+    });
+    groups += '<div class="res-group"><p class="res-presenter">'+esc(p.name)+
+      '</p><p class="res-talk">'+esc(p.talk)+'</p><ul>'+lis+'</ul></div>';
+  });
+  grid.innerHTML = groups ? '<div class="reslist">'+groups+'</div>' : '';
+  noResults.style.display = groups ? 'none' : 'block';
+  countEl.textContent = terms.length ? linkCount+' links match' : linkCount+' resources & websites';
 }
 
 searchEl.addEventListener('input', render);
