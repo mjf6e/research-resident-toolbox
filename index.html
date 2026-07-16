@@ -167,6 +167,22 @@
   ul.links li .note{color:var(--muted);}
   .note-only{font-size:.9rem;color:var(--muted);font-style:italic;margin:6px 0 0;}
 
+  /* ---------- Box full-decks panel ---------- */
+  .boxpanel{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff;border-radius:16px;padding:34px 30px;text-align:center;
+    border:1px solid var(--line);box-shadow:0 6px 20px rgba(35,45,75,.12);
+  }
+  .boxpanel h2{font-family:Georgia,serif;font-size:1.5rem;margin:0 0 10px;color:#fff;}
+  .boxpanel p{max-width:56ch;margin:0 auto 22px;color:#d7dceb;font-size:1rem;line-height:1.55;}
+  .boxbtn{
+    display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;
+    font-weight:700;font-size:1rem;padding:14px 26px;border-radius:10px;text-decoration:none;
+    box-shadow:0 3px 10px rgba(229,114,0,.35);transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .boxbtn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(229,114,0,.45);text-decoration:none;}
+  .boxnote{margin-top:18px;font-size:.82rem;color:#aeb6cc;}
+
   /* ---------- Resources list view ---------- */
   .reslist{
     background:var(--card);
@@ -230,6 +246,7 @@
     <div class="filters">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="resources">Resources</button>
+      <button class="filter-btn" data-filter="box">Full Decks</button>
       <button class="filter-btn" data-filter="rip">RIP Series</button>
       <button class="filter-btn" data-filter="bootcamp">Boot Camp</button>
     </div>
@@ -320,23 +337,28 @@ const DATA = [
   },
   {
     "name": "Elizabeth Mulcahy, PhD",
-    "type": "rip",
+    "type": "bootcamp",
     "role": "Partners in Discovery Program Director, UVA Comprehensive Cancer Center",
-    "talk": "What UVA patient clinical, genomics, and specimen data are available and how to access them",
-    "meta": "RIP — November 2025",
-    "topics": "epic cosmos orien cbioportal trinetx emerse caris manifold tempus cancer registry data access",
+    "talk": "Cancer Data Resources Available to the Research Community",
+    "meta": "Boot Camp — July 17, 2026 (also RIP, Nov 2025)",
+    "topics": "epic cosmos orien cbioportal trinetx emerse caris codeai manifold ai datamart galaxy atlas cancer registry omop tcga gtex depmap protein atlas byod data access genomics biospecimens",
     "emails": [
+      "Elizabeth.Mulcahy@uvahealth.org",
       "qx3k@uvahealth.org",
-      "researchdata@uvahealth.org",
-      "cancerregistry@uvahealth.org"
+      "researchdata@uvahealth.org — TriNetX / EMERSE",
+      "cancerregistry@uvahealth.org — Cancer Registry"
     ],
     "links": [
+      {
+        "note": "Manifold Cancer Data Management (log in via UVA NetBadge)",
+        "url": "https://uva.sc.manifold.ai/"
+      },
       {
         "note": "Tempus oncology publications",
         "url": "https://www.tempus.com/publications/?post-search=&filter=oncology"
       }
     ],
-    "extra": "Covers Epic Cosmos, ORIEN cBioPortal & Patient Timeline, TriNetX, EMERSE, Cancer Registry, Cancer Research DataMart, Caris CODEai, Manifold, Tempus Lens, and ORIEN Galaxy Atlas. Tip: Google “Partners in Discovery UVA” for the program site."
+    "extra": "Free data systems covered: Manifold (agentic-AI cohort discovery; UVA + public datasets TCGA, GTEx, DepMap, Human Protein Atlas; bring-your-own-data), Cancer Registry, TriNetX, EMERSE, Caris CODEai, ORIEN cBioPortal & Patient Timeline, ORIEN Galaxy Atlas (upcoming), Epic Cosmos, and the Cancer Research DataMart. Most are self-serve; some need CITI training or IRB approval. Email Dr. Mulcahy for Manifold access."
   },
   {
     "name": "Katie Rea",
@@ -374,15 +396,16 @@ const DATA = [
     "extra": "Required for every NIH T32 trainee; performance evaluation every 3–4 months. Final T32 reviews go to Erin Haggard (Surg Onc) or Tony Herring (TCV)."
   },
   {
-    "name": "Whitney McClendon & Erin Haggard",
+    "name": "Whitney McClendon, Erin Haggard & Kimberly Rogers",
     "type": "bootcamp",
-    "role": "Pre-Award (McClendon) / Post-Award (Haggard), DOS Research Administration",
+    "role": "Pre-Award (McClendon) / Post-Award (Haggard & Rogers), DOS Research Administration",
     "talk": "Research Administration Structure",
-    "meta": "Boot Camp 2024 & 2025",
-    "topics": "grants funding pre-award post-award researchpbh budget grantforward deadlines administration",
+    "meta": "Boot Camp 2024–2026",
+    "topics": "grants funding pre-award post-award researchpbh budget grantforward deadlines administration biosketch sciencv orcid era commons coi compliance",
     "emails": [
-      "wml4t@virginia.edu — Whitney McClendon, 434-924-5031",
-      "quw7kd@uvahealth.org — Erin Haggard, 434-982-2447"
+      "wml4t@virginia.edu — Whitney McClendon (Pre-Award), 434-924-5031",
+      "quw7kd@uvahealth.org — Erin Haggard (Post-Award), 380-269-9064",
+      "KR6TC@uvahealth.org — Kimberly Rogers (Post-Award)"
     ],
     "links": [
       {
@@ -392,9 +415,17 @@ const DATA = [
       {
         "note": "ClinicalTrials.gov",
         "url": "https://clinicaltrials.gov/"
+      },
+      {
+        "note": "SciENcv (link ORCID for NIH biosketch)",
+        "url": "https://www.ncbi.nlm.nih.gov/sciencv/"
+      },
+      {
+        "note": "ORCID",
+        "url": "https://orcid.org/"
       }
     ],
-    "extra": "Submissions route through ResearchPBH. Funding sources: SOM weekly email, UVA Cancer Center funding page, DoS Funding Opportunity Microsite (Genially), GrantForward (Michael Freeman sets up resident profiles)."
+    "extra": "Submissions route through ResearchPBH (intent 30 days prior, admin docs 10 business days, scientific 4 business days). Biosketch now uses the Common Form with ORCID linked to SciENcv and eRA Commons, limited to 10 publications; PIs certify each document. Funding sources: SOM weekly email, UVA Cancer Center funding page, DoS Funding Opportunity Microsite (Genially), and GrantForward (Michael Freeman sets up resident profiles)."
   },
   {
     "name": "Ankush Gosain, MD, PhD, MBA, FACS, FAAP",
@@ -446,11 +477,11 @@ const DATA = [
     "extra": "Michael Freeman helps residents set up GrantForward profiles for targeted funding announcements."
   },
   {
-    "name": "Kim Bullock, PhD, CCRP",
+    "name": "Kim Bullock, PhD, CCRP (with Katie Rea)",
     "type": "bootcamp",
     "role": "Professor of Research, DOS; Director of Protocol Development, UVA Comprehensive Cancer Center",
     "talk": "Institutional Review Board (IRB) Submissions",
-    "meta": "Boot Camp 2024 & 2025",
+    "meta": "Boot Camp 2024–2026",
     "topics": "IRB HSR protocol builder exempt expedited full board submissions regulatory CITI GCP",
     "emails": [
       "kb9d@uvahealth.org",
@@ -492,7 +523,7 @@ const DATA = [
     "type": "bootcamp",
     "role": "Research & Data Services, Claude Moore Health Sciences Library",
     "talk": "Library Research & Data Support / Systematic Reviews & Meta-analyses",
-    "meta": "Boot Camp 2024 (Systematic Reviews) & 2025 (Library support)",
+    "meta": "Boot Camp 2024–2026",
     "topics": "library systematic review meta-analysis covidence zotero endnote rayyan prospero libkey embase virgo data services",
     "emails": [
       "ash6b@virginia.edu — Andrea Denton",
@@ -573,24 +604,28 @@ const DATA = [
     "name": "Russell Witt, MD, MAS",
     "type": "bootcamp",
     "role": "Assistant Professor of Surgery",
-    "talk": "Harnessing AI in Surgical Academia; and How to Write an Abstract",
-    "meta": "Boot Camp 2024 (abstract) & 2025 (AI)",
-    "topics": "artificial intelligence ai chatgpt semantic scholar abstract writing productivity paperpal",
+    "talk": "Harnessing the Power of AI in Surgical Academia",
+    "meta": "Boot Camp 2024–2026",
+    "topics": "artificial intelligence ai chatgpt dalle semantic scholar abstract writing productivity paperpal literature review",
     "emails": [],
     "links": [
       {
         "note": "Semantic Scholar (Allen Institute for AI)",
         "url": "https://www.semanticscholar.org/"
+      },
+      {
+        "note": "Spotting AI-generated writing (YouTube short)",
+        "url": "https://youtube.com/shorts/34BmRpsDTh0"
       }
     ],
-    "extra": "Tools discussed: Semantic Scholar, ChatGPT/DALL·E, Paperpal Preflight. Notes NIH policy limiting AI-substantially-developed applications."
+    "extra": "Tools discussed: Semantic Scholar, ChatGPT/DALL·E, and Paperpal Preflight (Annals of Surgery submission check). Frames AI as assistive intelligence — good for emails, summarizing, proofreading, and idea generation, but unreliable as a search engine. Notes NIH policy limiting AI-substantially-developed applications."
   },
   {
     "name": "Craig Slingluff, MD",
     "type": "bootcamp",
     "role": "T32 Program Director, Surgical Oncology",
     "talk": "Expectations and Guidelines for Research Residents",
-    "meta": "Boot Camp 2024 & 2025",
+    "meta": "Boot Camp 2024–2026",
     "topics": "expectations productivity publications grants biosketch idp nih public access pmcid t32 research residents",
     "emails": [
       "quw7kd@uvahealth.org — send productivity updates to Erin Haggard",
@@ -664,7 +699,7 @@ const DATA = [
     "type": "bootcamp",
     "role": "Department of Surgery",
     "talk": "From Framing a Scientific Question to Designing Experiments",
-    "meta": "Boot Camp 2024 (Teman) & 2025 (Tsihlis)",
+    "meta": "Boot Camp 2024–2026 (Teman & Tsihlis)",
     "topics": "scientific question hypothesis finer pico spider experiment design specific aims research methods",
     "emails": [],
     "links": [
@@ -737,6 +772,10 @@ function render(){
     renderResources(terms);
     return;
   }
+  if(activeFilter==='box'){
+    renderBox();
+    return;
+  }
 
   grid.style.display = '';
   let shown = 0;
@@ -755,6 +794,19 @@ function render(){
   noResults.style.display = shown ? 'none' : 'block';
   const total = DATA.length;
   countEl.textContent = shown===total ? '' : 'Showing '+shown+' of '+total;
+}
+
+function renderBox(){
+  grid.style.display = 'block';
+  grid.innerHTML =
+    '<div class="boxpanel">' +
+    '<h2>Full Presentation Decks</h2>' +
+    '<p>Every Boot Camp and RIP presentation — including talks without web links, like grant writing, abstract writing, and outcomes research — is available to view or download from our shared UVA Box folder.</p>' +
+    '<a class="boxbtn" href="https://virginia.box.com/s/2glx4ns9crwsdx9zk6gnxwned7t2w55n" target="_blank" rel="noopener">Open the Box folder &rarr;</a>' +
+    '<p class="boxnote">Requires UVA NetBadge sign-in.</p>' +
+    '</div>';
+  noResults.style.display = 'none';
+  countEl.textContent = '';
 }
 
 function renderResources(terms){
