@@ -260,6 +260,7 @@
       <button class="filter-btn" data-filter="travel">Travel</button>
       <button class="filter-btn" data-filter="resources">Resources</button>
       <button class="filter-btn" data-filter="box">Full Decks</button>
+      <button class="filter-btn" data-filter="hsl">HSL Research &amp; Data Workshops</button>
     </div>
   </div>
   <div class="count" id="count"></div>
@@ -1065,6 +1066,10 @@ function render(){
     renderTravel();
     return;
   }
+  if(activeFilter==='hsl'){
+    renderHSL();
+    return;
+  }
 
   grid.style.display = '';
   let shown = 0;
@@ -1107,6 +1112,18 @@ function renderTravel(){
     '<h2>Resident Travel Policy</h2>' +
     '<p>Everything residents need to know about requesting and booking travel for conferences and academic meetings — approval steps, funding sources, and booking instructions — lives on its own site.</p>' +
     '<a class="boxbtn" href="https://mjf6e.github.io/uva-surgery-travel-policy-2026/" target="_blank" rel="noopener">Open the Travel Policy site &rarr;</a>' +
+    '</div>';
+  noResults.style.display = 'none';
+  countEl.textContent = '';
+}
+
+function renderHSL(){
+  grid.style.display = 'block';
+  grid.innerHTML =
+    '<div class="boxpanel">' +
+    '<h2>HSL Research &amp; Data Workshops</h2>' +
+    '<p>The Claude Moore Health Sciences Library offers a full calendar of hands-on workshops covering research and data topics — from citation management to statistical software and data management.</p>' +
+    '<a class="boxbtn" href="https://cal.hsl.virginia.edu/calendar/data/?cid=-1&t=g&d=0000-00-00&cal=-1&inc=0" target="_blank" rel="noopener">View the workshop calendar &rarr;</a>' +
     '</div>';
   noResults.style.display = 'none';
   countEl.textContent = '';
